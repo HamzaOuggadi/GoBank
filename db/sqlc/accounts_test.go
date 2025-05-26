@@ -50,6 +50,7 @@ func TestDeleteAccountById(t *testing.T) {
 	require.NoError(t, err)
 	_, err = testQueries.GetAccountById(context.Background(), account.ID)
 	require.Error(t, err)
+	require.EqualError(t, err, "no rows in result set")
 }
 
 func TestUpdateAccount(t *testing.T) {
