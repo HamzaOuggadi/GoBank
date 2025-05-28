@@ -10,7 +10,7 @@ INSERT INTO accounts (
 -- name: ListAccounts :many
 SELECT * from accounts
 ORDER BY id
-LIMIT $1;
+LIMIT $1 OFFSET $2;
 
 -- name: GetAccountById :one
 SELECT * from accounts
