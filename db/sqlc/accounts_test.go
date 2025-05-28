@@ -50,7 +50,7 @@ func TestDeleteAccountById(t *testing.T) {
 	require.NoError(t, err)
 	_, err = testQueries.GetAccountById(context.Background(), account.ID)
 	require.Error(t, err)
-	require.EqualError(t, err, "no rows in result set")
+	require.ErrorContains(t, err, "no rows in result set")
 }
 
 func TestUpdateAccount(t *testing.T) {
@@ -63,10 +63,6 @@ func TestUpdateAccount(t *testing.T) {
 
 	updatedAccount, err := testQueries.UpdateAccountBalance(context.Background(), arg)
 	require.NoError(t, err)
-
-	// Logging the updated account for debugging
-	t.Logf("Original Account : %+v", account)
-	t.Logf("Updated Account: %+v", updatedAccount)
 
 	require.NotEmpty(t, updatedAccount)
 	require.Equal(t, account.ID, updatedAccount.ID)
@@ -91,5 +87,4 @@ func TestListAccounts(t *testing.T) {
 	require.NotEmpty(t, accounts)
 	require.Len(t, accounts, 10)
 
-	t.Logf("Accounts: %+v", accounts)
 }
